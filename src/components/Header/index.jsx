@@ -1,14 +1,15 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext/index'
+import { AuthContext } from '../../contexts/AuthContext/index'
 import { doSignOut } from '../../firebase/auth'
+import { useContext } from 'react'
 
 export const Header = () => {
   const navigate = useNavigate()
-  const { isAuthenticated } = useAuth()
-
+  const { isAuthenticated } = useContext(AuthContext)
+  
   return (
     <nav>
-      {isAuthenticated ? (
+      {!!isAuthenticated ? (
         <button onClick={() => doSignOut().then(() => navigate('/login'))}>Logout</button>
       ) : (
         <>

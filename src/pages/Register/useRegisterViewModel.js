@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
-export const SignUp = () => {
+export const useRegisterViewModel = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const auth = getAuth()
@@ -20,14 +20,5 @@ export const SignUp = () => {
     }
   }
 
-  return (
-    <div>
-      <h1>This is the sign up page</h1>
-      <form>
-        <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Email" />
-        <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" />
-        <button onClick={handleSignUp}>Sign Up</button>
-      </form>
-    </div>
-  )
+  return { setEmail, setPassword, handleSignUp }
 }

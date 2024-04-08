@@ -1,5 +1,5 @@
 
 export const useHomeViewModel = () => {
 
- return {  }
+  return {  }
 }

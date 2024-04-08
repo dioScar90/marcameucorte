@@ -1,10 +1,9 @@
-import './Footer.css'
-import { useFooterViewModel } from './useFooterViewModel'
+// import { useFooterViewModel } from './useFooterViewModel'
 
 export const Footer = () => {
- const {  } = useFooterViewModel()
+//  const {  } = useFooterViewModel()
 
  return (
-   <div>Footer</div>
+   <footer>Footer</footer>
  )
 }
