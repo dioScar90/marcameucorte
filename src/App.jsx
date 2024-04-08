@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
-import { Home } from './routes/Home'
-import { SignIn } from './routes/SignIn'
-import { SignUp } from './routes/SignUp'
+import { Home } from './pages/Home'
+import { SignIn } from './pages/SignIn'
+import { SignUp } from './pages/SignUp'
 import { AuthContext } from './contexts/AuthContext'
-import { Protected } from './routes/Protected'
+import { Protected } from './pages/Protected'
 
 function App() {
   const router = createBrowserRouter([
