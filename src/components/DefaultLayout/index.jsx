@@ -1,10 +1,10 @@
+import { useContext } from 'react'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
-import { Outlet } from 'react-router-dom'
-// import { useDefaultLayoutViewModel } from './useDefaultLayoutViewModel'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export const DefaultLayout = () => {
-  // const {  } = useDefaultLayoutViewModel()
 
   return (
     <main>

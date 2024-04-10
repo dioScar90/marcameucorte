@@ -4,17 +4,19 @@ import { AuthContext } from '../../contexts/AuthContext'
 
 export const Header = () => {
   const { user, logout } = useContext(AuthContext)
+
+  if (!user) {
+    return (
+      <nav>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/register">Register new account</NavLink>
+      </nav>
+    )
+  }
   
   return (
     <nav>
-      {user ? (
-        <button onClick={logout}>Logout</button>
-      ) : (
-        <>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/register">Register new account</NavLink>
-        </>
-      )}
+      <button onClick={logout}>Logout</button>
     </nav>
   )
 }

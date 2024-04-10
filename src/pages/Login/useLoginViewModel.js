@@ -1,27 +1,34 @@
-import { useState } from "react"
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export const useLoginViewModel = () => {
+  const { user, login } = useContext(AuthContext)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const auth = getAuth()
   const navigate = useNavigate()
 
-  const handleSignIn = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
 
     console.log('email', email)
     console.log('password', password)
 
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password)
-      console.log('user', user)
-      setTimeout(() => navigate('/home'), 1000)
+      const loggedUser = await login(email, password)
+      console.log('loggedUser', loggedUser)
+      setTimeout(() => navigate('/dashboard'), 500)
     } catch (err) {
       console.log('error', err)
     }
   }
 
-  return { setEmail, setPassword, handleSignIn }
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/dashboard')
+  //   }
+  // }, [])
+
+  return { user, setEmail, setPassword, handleLogin }
 }

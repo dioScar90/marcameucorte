@@ -1,24 +1,49 @@
-import { useState } from "react"
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export const useRegisterViewModel = () => {
+  const { user, register, loginWithGoogle } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const auth = getAuth()
 
-  const handleSignUp = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
 
     console.log('email', email)
     console.log('password', password)
 
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password)
-      console.log('user', user)
+      const registeredUser = await register(email, password)
+      console.log('registeredUser', registeredUser)
+      setTimeout(() => navigate('/dashboard'), 500)
     } catch (err) {
       console.log('error', err)
     }
   }
 
-  return { setEmail, setPassword, handleSignUp }
+  const handleRegisterWithGoogle = async (e) => {
+    e.preventDefault()
+
+    console.log('email', email)
+    console.log('password', password)
+
+    try {
+      const registeredUser = await loginWithGoogle()
+      console.log('registeredUser', registeredUser)
+      setTimeout(() => navigate('/dashboard'), 500)
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
+  
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/dashboard')
+  //   }
+  // }, [])
+
+  return { user, navigate, setEmail, setPassword, handleRegister, handleRegisterWithGoogle, user }
 }
